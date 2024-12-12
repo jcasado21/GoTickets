@@ -19,14 +19,14 @@
     </div>
     <div class="container">
         {% if user.is_authenticated %}
-        {% csrf_token %}
-        <p>Bienvenido, {{ user.username }}!</p>
-        <a href="{% url 'misTickets' %}" class="btn btn-secondary">Ver Mis Tickets</a>
-        <a href="{% url 'misTickets' %}" class="btn btn-secondary">Cerrar sesion</a>
-        
+            {% csrf_token %}
+            <p>Bienvenido, {{ user.username }}!</p>
+            <a href="{% url 'misTickets' %}" class="btn btn-secondary">Ver Mis Tickets</a>
+            <a href="{% url 'cerrar_sesion' %}" class="btn btn-danger">Cerrar Sesión</a> <!-- Botón para cerrar sesión -->
         {% else %}
-        <a href="{% url 'iniciarSesion' %}" class="btn btn-secondary">Iniciar Sesión</a>
+            <a href="{% url 'iniciar_sesion' %}" class="btn btn-secondary">Iniciar Sesión</a>
         {% endif %}
+
     </div>
     <div class="container">
         <h2>Eventos Disponibles</h2>

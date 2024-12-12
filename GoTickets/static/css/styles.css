@@ -50,6 +50,7 @@ h1 {
     text-align: center;
     border: none;
     margin-bottom: 15px; /* Espaciado inferior para separación entre botones */
+    text-decoration: none;
 }
 
 .btn-secondary {

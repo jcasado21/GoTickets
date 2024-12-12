@@ -1,9 +1,9 @@
-from datetime import datetime
+
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Event, Ticket
 from rest_framework import viewsets
 from .serializer import EventSerializer, TicketSerializer, UsuarioSerializer
-from django.http import Http404
+
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
@@ -11,10 +11,14 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django import forms
-from .models import Ticket, Usuario
+
+from .models import Ticket
 from django.contrib.auth import authenticate, login
-from django.utils.datastructures import MultiValueDictKeyError
+
+from .forms import RegistroUsuarioForm
+from django.contrib import messages  # Para mostrar mensajes de error
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 
 
@@ -25,6 +29,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 def index(request):
     events = Event.objects.all()  # Obtiene todos los eventos de la base de datos
     return render(request, 'index.html', {'events': events})
+
+
 
 def reserva(request):
     return render(request, 'reserva.html', {})
@@ -93,51 +99,37 @@ class UsuarioViewSet(viewsets.ViewSet):
             return Response({'success': True, 'message': 'Usuario registrado correctamente.', 'user_id': user.id})
         return Response({'success': False, 'errors': serializer.errors})
 
-def registro(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        nombre_completo = request.POST.get('nombre_completo')
-        direccion = request.POST.get('direccion')
-        telefono = request.POST.get('telefono')
-        fecha_nacimiento = request.POST.get('fecha_nacimiento')
-        foto_perfil = request.FILES.get('foto_perfil')
-        
-        # Crear el usuario Django
-        user = User.objects.create_user(username=username, password=password)
-        
-        # Guardar la información adicional del usuario
-        usuario = Usuario(
-            user=user,
-            username=username,  # Asigna el nombre de usuario
-            password=user.password,  # Guarda el hash de la contraseña
-            nombre_completo=nombre_completo,
-            direccion=direccion,
-            telefono=telefono,
-            fecha_nacimiento=fecha_nacimiento,
-            foto_perfil=foto_perfil
-        )
-        usuario.save()
-        
-        # Autenticar y logear al usuario automáticamente después del registro
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index')  # Redirige a la página principal después del registro
-        
-    return render(request, 'registro.html')
+def registro_usuario(request):
+    if request.method == "POST":
+        form = RegistroUsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('iniciar_sesion')  # Redirigir a la página de login después del registro
+    else:
+        form = RegistroUsuarioForm()
+
+    return render(request, 'registro.html', {'form': form})
 
 
 
 def iniciar_sesion(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.method == "POST":
+        username = request.POST['usuario']  # 'usuario' debe coincidir con el name del input
+        password = request.POST['pass']  # 'pass' debe coincidir con el name del input
+        
+        # Autenticar al usuario
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            # Si las credenciales son válidas, iniciar sesión
             login(request, user)
-            return redirect('index')  # Redirige a la página principal o a la página de eventos
+            return redirect('index')  # Redirige a la URL del index
         else:
-            # No se pudo autenticar el usuario, redirige o muestra un mensaje de error
-            return render(request, 'iniciarSesion.html', {'error': 'Credenciales inválidas'})
-    return render(request, 'iniciarSesion.html')
+            # Si las credenciales no son válidas
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+
+    return render(request, 'iniciar_sesion.html')  # Renderiza el formulario si no es POST
+
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('index')  # Redirige al index o a cualquier otra página

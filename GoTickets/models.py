@@ -3,6 +3,9 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth.models import User
+from django.db import models
+from django.core.validators import RegexValidator
 
 class Event(models.Model):
     title = models.CharField(max_length=200)  # Título del evento
@@ -30,17 +33,20 @@ class Ticket(models.Model):
 
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # Relación uno a uno con el modelo User
-    username = models.CharField(max_length=150, unique=True, default='usuario_anónimo')  # Nombre de usuario
-    password = models.CharField(max_length=128, default='')  # Campo de contraseña (hasheada)
+    username = models.CharField(max_length=150, unique=True)  # Nombre de usuario (único)
     nombre_completo = models.CharField(max_length=255)  # Nombre completo del usuario
-    direccion = models.CharField(max_length=255, null=True, blank=True)  # Dirección del usuario, opcional
-    telefono = models.CharField(max_length=20, null=True, blank=True)  # Número de teléfono del usuario, opcional
-    fecha_nacimiento = models.DateField(null=True, blank=True)  # Fecha de nacimiento del usuario, opcional
-    foto_perfil = models.ImageField(upload_to='profile_images/', null=True, blank=True)  # Campo de imagen de perfil, opcional
+    direccion = models.CharField(max_length=255, default='Desconocida')  # Dirección, sin permitir NULL
+    telefono = models.CharField(
+        max_length=20, 
+        blank=True, 
+        null=True,  # Permitir NULL si el teléfono no está disponible
+        validators=[RegexValidator(r'^\+?1?\d{9,15}$')]  # Validación para teléfono
+    )  # Número de teléfono del usuario, opcional
+    fecha_nacimiento = models.DateField(null=True, blank=True)  # Fecha de nacimiento, opcional
+    foto_perfil = models.ImageField(upload_to='profile_images/', null=True, blank=True)  # Imagen de perfil, opcional
 
     def __str__(self):
         return self.user.username  # Devuelve el nombre de usuario del usuario
-
 
 
 
