@@ -28,6 +28,10 @@ body {
     margin-bottom: 10px; /* Espaciado inferior para separación entre secciones */
 }
 
+.container p{
+    text-align: center;
+}
+
 h1 {
     text-align: center;
     color: #c084fc; /* Morado brillante */
@@ -93,6 +97,7 @@ h1 {
 .event h3 {
     color: #6b3f8e; /* Morado oscuro */
     font-size: 1.5rem;
+    text-align: left;
 }
 
 .event .event-info {
@@ -105,6 +110,7 @@ h1 {
     margin: 5px 0;
     font-size: 1rem;
     color: #6b3f8e;
+    text-align: right;
 }
 
 .event-image {
@@ -136,4 +142,14 @@ h1 {
 
 .container h2 {
     color: #9b4dca;
+}
+
+p{
+    color: #6b3f8e;
+    text-align: left;
+}
+
+footer p{
+    color: white;
+    text-align: center;
 }

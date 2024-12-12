@@ -7,10 +7,11 @@ class EventSerializer(serializers.ModelSerializer):
         model=Event
         fields='__all__'
 
-class EntradaSerializer(serializers.ModelSerializer):
+class TicketSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ticket
-        fields = '__all__'
+        model=Ticket
+        fields='__all__'
+
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:

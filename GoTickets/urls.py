@@ -9,6 +9,7 @@ import os
 
 router = routers.DefaultRouter()
 router.register(r'events', views.EventViewSet)
+router.register(r'tickets', views.TicketViewSet)
 router.register(r'usuarios', views.UsuarioViewSet, basename='usuario')
 
 
@@ -17,6 +18,7 @@ urlpatterns = [
     path('misTickets/', views.misTickets, name='misTickets'),
     path('iniciarSesion/', views.iniciarSesion, name='iniciarSesion'),
     path('detalles/', views.detalles, name='detalles'),
+    path('compra/<int:event_id>/', views.CompraView.as_view(), name='compra'),
     path('registro/', views.registro, name='registro'),
 
     path('comprar/<int:event_id>/', views.reserva, name='reserva'),  # URL para comprar un ticket
