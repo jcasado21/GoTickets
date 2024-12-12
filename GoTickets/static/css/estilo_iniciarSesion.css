@@ -1,0 +1,118 @@
+/* Estilo global */
+body {
+    background: linear-gradient(to right, #9b4dca, #06b6d4); /* Gradiente de morado a cian */
+    background-size: cover;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    flex-direction: column; /* Para centrar todo de manera vertical */
+    text-align: center;
+}
+
+/* Contenedor */
+.container {
+    max-width: 600px; /* Reducción del ancho para mayor enfoque */
+    margin: 20px auto;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semitransparente */
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Título */
+h1 {
+    color: #c084fc; /* Morado brillante */
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* Botones */
+.btn {
+    border-radius: 5px; /* Bordes más suaves */
+    padding: 12px 24px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    margin: 10px; /* Espacio entre los botones */
+}
+
+.btn-primary {
+    background: #c084fc; /* Morado */
+    color: #121212;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #a855f7;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: #06b6d4; /* Cian */
+    color: #121212;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background: #0891b2;
+    transform: scale(1.05);
+}
+
+/* Formulario */
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px; /* Espacio entre la etiqueta y el input */
+}
+
+input[type="text"], 
+input[type="password"] {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid rgba(200, 200, 200, 0.6);
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    width: 100%;
+    max-width: 500px; /* Limitar el tamaño del formulario */
+    margin: 10px 0; /* Espacio entre los campos */
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus {
+    border-color: #00bcd4;
+    outline: none;
+}
+
+/* Estilo para el texto de "Si ya tienes cuenta, inicia sesión" */
+.mb-3 h3 {
+    color: #06b6d4; /* Color cian que complementa el fondo */
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: #dc3545; /* Rojo para resaltar el error */
+    font-weight: 600;
+    background-color: rgba(220, 53, 70, 0.418);
+    border-left: 4px solid #dc3545;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: block; /* Asegura que el error se muestra en su propio bloque */
+}

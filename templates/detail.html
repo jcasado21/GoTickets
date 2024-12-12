@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ event.title }}</title>
+</head>
+<body>
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.description }}</p>
+    <p><strong>Fecha de Inicio:</strong> {{ event.start_date }}</p>
+    <p><strong>Fecha de Finalización:</strong> {{ event.end_date }}</p>
+    <p><strong>Ubicación:</strong> {{ event.location }}</p>
+    
+    <h2>Tickets Disponibles:</h2>
+    <ul>
+    {% for ticket in tickets %}
+        <li>{{ ticket.user }} - {{ ticket.number_of_tickets }} tickets</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

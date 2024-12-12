@@ -1,0 +1,139 @@
+/* Estilo global */
+body {
+    background: linear-gradient(to right, #9b4dca, #06b6d4); /* Gradiente de morado a cian */
+    background-size: cover;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    flex-direction: column; /* Para centrar todo de manera vertical */
+    text-align:justify;
+    position: relative; /* Añadir esto para referencia de posicionamiento */
+}
+
+.container {
+    max-width: 1200px; /* Incrementar el ancho para mayor enfoque */
+    margin: 10px auto;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semitransparente */
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    position: relative; /* Asegura que el botón se posicione relativo a este contenedor */
+    margin-bottom: 10px; /* Espaciado inferior para separación entre secciones */
+}
+
+h1 {
+    text-align: center;
+    color: #c084fc; /* Morado brillante */
+    font-weight: 600;
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    border-radius: 5px; /* Bordes más suaves */
+    padding: 12px 24px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    margin-bottom: 15px; /* Espaciado inferior para separación entre botones */
+}
+
+.btn-secondary {
+    background: #06b6d4;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #0891b2;
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background: #c084fc;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #a855f7;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background: #f87171;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #ef4444;
+    transform: scale(1.05);
+}
+
+.event {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Espaciado inferior para separación entre eventos */
+    display: flex;
+    flex-direction: row; /* Cambiado para alinear los elementos horizontalmente */
+    justify-content: space-between; /* Espacio entre los elementos */
+    align-items: center; /* Alinea elementos en el centro */
+}
+
+.event h3 {
+    color: #6b3f8e; /* Morado oscuro */
+    font-size: 1.5rem;
+}
+
+.event .event-info {
+    display: flex;
+    flex-direction: column; /* Cambiado para que los elementos se alineen verticalmente dentro del contenedor */
+    margin: 20px;
+}
+
+.event p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #6b3f8e;
+}
+
+.event-image {
+    width: 300px; /* Ajustar el tamaño según sea necesario */
+    height: auto; /* Mantener la relación de aspecto */
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse; /* Colapsar bordes */
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    border-radius: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    color: #333;
+}
+
+.table th {
+    background-color: #6b3f8e; /* Morado oscuro */
+    color: #fff;
+    border: 2px solid #ffffff; /* Añadir borde blanco alrededor del título */
+    text-transform: uppercase; /* Poner el texto en mayúsculas */
+}
+
+.container h2 {
+    color: #9b4dca;
+}

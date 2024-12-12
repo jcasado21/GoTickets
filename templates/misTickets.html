@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Entradas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        #entradas {
+            margin: 20px auto;
+            max-width: 600px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #entradas th,
+        #entradas td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #entradas th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button:hover {
+            background: #545b62;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mis Entradas Reservadas</h1>
+    <button onclick="goBack()" class="button">Volver Atrás</button>
+
+    <!-- Formulario para ingresar correo -->
+    <form id="buscarEntradasForm">
+        <label for="email">Introduce tu correo para ver tus reservas:</label>
+        <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+        <button type="submit">Buscar Entradas</button>
+    </form>
+
+    <!-- Tabla para mostrar las entradas -->
+    <table id="entradas">
+        <thead>
+            <tr>
+                <th>Evento</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se insertarán las entradas dinámicamente -->
+        </tbody>
+    </table>
+
+    <!-- Mensaje de error o sin resultados -->
+    <p id="mensaje" class="error"></p>
+
+    <script>
+        document.getElementById('buscarEntradasForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Evitar recargar la página
+            const email = document.getElementById('email').value;
+
+            // Simula una llamada al servidor
+            fetch(`/api/obtener_entradas?email=${email}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudieron obtener las entradas');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const tbody = document.querySelector('#entradas tbody');
+                    tbody.innerHTML = ''; // Limpiar la tabla
+
+                    if (data.length === 0) {
+                        document.getElementById('mensaje').textContent = 'No se encontraron reservas para este correo.';
+                    } else {
+                        document.getElementById('mensaje').textContent = '';
+                        data.forEach(entrada => {
+                            const row = `
+                                <tr>
+                                    <td>${entrada.evento}</td>
+                                    <td>${entrada.cantidad}</td>
+                                    <td>${entrada.fecha}</td>
+                                </tr>
+                            `;
+                            tbody.innerHTML += row;
+                        });
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('mensaje').textContent = error.message;
+                });
+        });
+    </script>
+
+</body>
+
+</html>
